@@ -9,6 +9,13 @@ const JWT_Secret="nepali$boy"
 
 
 
+// testing endpoints
+router.get('/test',(req,res)=>{
+    res.json({
+        "sucess":"HI i'm test page"
+    })
+})
+
 
 // Signup page endpoint -- input validation,input secured,send jsonwebtoken to authenticate a valid users 
 router.post('/signup',[
