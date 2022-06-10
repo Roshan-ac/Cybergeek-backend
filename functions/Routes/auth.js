@@ -7,13 +7,10 @@ var jwt = require('jsonwebtoken');
 const fetchUser = require('../../Middleware/fetchUser');
 const JWT_Secret="nepali$boy"
 const youtube=require('../../blog/youtube')
-const path=require('path')
-
-
 
 // testing endpoints
 router.get('/tutorials',(req,res)=>{
-res.json([youtube])
+res.json(youtube)
    
 })
 
