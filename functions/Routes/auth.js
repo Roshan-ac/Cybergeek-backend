@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 const fetchUser = require('../../Middleware/fetchUser');
 const JWT_Secret="nepali$boy"
-const youtube=require('../../blog/youtube')
+const youtube=require('../blog/youtube.json')
 
 // testing endpoints
 router.get('/tutorials',(req,res)=>{
