@@ -10,7 +10,7 @@ const youtube=require('../blog/youtube.json')
 
 // testing endpoints
 router.get('/tutorials',(req,res)=>{
-res.json(youtube)
+res.send(youtube)
    
 })
 
