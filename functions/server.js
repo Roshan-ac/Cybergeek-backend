@@ -1,21 +1,33 @@
 var express=require('express')
 const MongoConnect=require('./db')
-var path=require('path')
 var app=express()
-var Port=5000
+const Port=5000
 const cors = require('cors')
 const serverless=require('serverless-http')
 const router=require('./Routes/auth')
-const profile =require('./Routes/profile')
+const file=require('./Routes/files')
+const bodyParser=require('body-parser')
+const fileUpload=require('express-fileupload')
+
+
+
+
+app.use(fileUpload({
+    useTempFiles:true
+}))
 
 app.use(cors())
 //middleware to use json data
 app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 app.use('/auth',router)
-app.use('/profile',profile)
+app.use('/profile',file)
 
 
-
+app.listen(Port,()=>{
+    console.log('server started successfully, listening on port:', Port)
+})
 MongoConnect();
 
 module.exports.handler=serverless(app)
