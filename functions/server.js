@@ -25,9 +25,9 @@ app.use('/auth',router)
 app.use('/profile',file)
 
 
-app.listen(Port,()=>{
-    console.log('server started successfully, listening on port:', Port)
-})
+// app.listen(Port,()=>{
+//     console.log('server started successfully, listening on port:', Port)
+// })
 MongoConnect();
 
 module.exports.handler=serverless(app)
