@@ -20,7 +20,6 @@ app.use(cors())
 //middleware to use json data
 app.use(express.json())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
 app.use('/auth',router)
 app.use('/profile',file)
 
