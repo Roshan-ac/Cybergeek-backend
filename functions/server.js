@@ -18,15 +18,16 @@ app.use(fileUpload({
 
 app.use(cors())
 //middleware to use json data
-app.use(express.json())
+app.use(express.json({limit:'50mb'}))
+app.use(express.urlencoded({limit:'50mb',extended:true}))
 app.use(bodyParser.json())
 app.use('/auth',router)
 app.use('/profile',file)
 
 
-// app.listen(Port,()=>{
-//     console.log('server started successfully, listening on port:', Port)
-// })
+app.listen(Port,()=>{
+    console.log(`server started successfully, listening on port:${Port}`)
+})
 MongoConnect();
 
 module.exports.handler=serverless(app)

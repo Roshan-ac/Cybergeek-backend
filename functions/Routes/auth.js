@@ -17,12 +17,16 @@ res.send(youtube)
 
 // Signup page endpoint -- input validation,input secured,send jsonwebtoken to authenticate a valid users 
 router.post('/signup',[
-    body('firstname','firstname must be at least 3 characters').isLength({ min: 3 }),
-    body('lastname','lastname must be atleast 3 character').isLength({ min: 3 }),
+   
+    body('fullname','name must be atleast 6 character').isLength({ min: 6 }),
     body('email','Please enter a valid email address').isEmail(),
     body('password','Password must be minimum 6 character long').isLength({min:6})
 ],
 async(req,res)=>{
+    var profile=""
+  if(req.body.data){
+profile=req.body.data
+  }
    // Input Validation start
    let success=false
     const errors = validationResult(req);
@@ -41,10 +45,10 @@ async(req,res)=>{
         const salt= await bcrypt.genSalt(10)
         secPass=await bcrypt.hash(req.body.password,salt)
         User = await user.create({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
+            fullname: req.body.fullname,
             email:req.body.email,
-            password:secPass
+            password:secPass,
+            profile:profile
         })
 
         //declared data object to store value of user.id into id
