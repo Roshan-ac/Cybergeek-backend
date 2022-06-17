@@ -15,35 +15,31 @@ cloudinary.config({
 
 file.post('/update_profile',fetchUser, async function (req, res, next) {
   const userId=req.User.id
-  const json=req.body.data 
+  const image=req.body.image
+  const data= req.body.data
+
   try{
     const user=await User.findById(userId).select("-password")
-    const upload = await cloudinary.v2.uploader.upload(json,{
+    const upload = await cloudinary.v2.uploader.upload(image,{
       upload_preset:'profilePicture'
     })
   const update =  await User.updateMany({
       profile:upload.secure_url,
-      email:req.body.email,
-      fullname:req.body.username
+      email:data.email,
+      fullname:data.fullname
     })
+    
 res.status(200).json({
   Updated:"Data updated successfully"
 })
   }catch(err){
     console.log(err)
   }
- 
 
-
-  // const file=req.files.image
-  // const upload = await cloudinary.v2.uploader.upload(file.tempFilePath,(err,result)=>{
-  //   if(result){
-  //     res.status(200).json({"success":"Image upload successfully"})
-  //   }
-  // })
-
-  // 
   })
+
+  
+
 
 
 
